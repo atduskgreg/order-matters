@@ -1,3 +1,5 @@
+require 'csv'
+
 DATA_FOLDER = "../ml-100k"
 
 # find average score for each movie
@@ -34,16 +36,63 @@ item_scores.each do |item_id, ratings|
 	item_scores[item_id] = ratings.inject{ |sum, el| sum + el }.to_f / ratings.size
 end
 
-# sort user ratings in ascending order by timestamp
-user_scores.each do |user, ratings|
-	user_scores[user] = ratings.sort do |a,b| 
-		if a[:timestamp] > b[:timestamp]
-			1
-		elsif a[:timestamp] < b[:timestamp]
-			-1
-		else
-			0
+# for each user-rating collect:
+# rating n-1
+# rating n
+# difference between n and n-1
+# average for movie at n
+
+i = 1
+
+CSV.open("movielens_sequence_data.csv", "wb") do |csv|
+	# column headers
+    csv << ["user_id", "previous rating", "rating", "rating delta", "prev rating time", "rating time", "time delta", "previous movie id", "movie id", "movie average"]
+	
+	user_scores.each do |user, ratings|
+		puts "#{i}/#{user_scores.length}"; i = i + 1
+		 # populate user_id column
+
+		# sort user ratings in ascending order by timestamp
+		ratings.sort! do |a,b| 
+			if a[:timestamp] > b[:timestamp]
+				1
+			elsif a[:timestamp] < b[:timestamp]
+				-1
+			else
+				0
+			end
 		end
+
+		ratings.each_with_index do |current, i|
+			if i > 0
+				row = [user]
+				prev = ratings[i-1]
+				prev_rating = prev[:rating]
+				rating = current[:rating]
+				rating_delta = rating - prev_rating
+				prev_movie_id = prev[:item_id]
+				movie_id = current[:item_id]
+				movie_average = item_scores[movie_id]
+				prev_rating_time = prev[:timestamp]
+				rating_time = current[:timestamp]
+				time_delta = rating_time - prev_rating_time
+
+				row << prev_rating
+				row << rating
+				row << rating_delta
+				row << prev_rating_time
+				row << rating_time
+				row << time_delta
+				row << prev_movie_id
+				row << movie_id
+				row << movie_average
+				csv << row
+			end
+		end
+
+
+
 	end
 end
+
 
