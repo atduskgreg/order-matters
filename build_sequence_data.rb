@@ -47,7 +47,7 @@ end
 
 i = 1
 
-CSV.open("movielens_sequence_data.csv", "wb") do |csv|
+CSV.open("100k_user_sequences.csv", "wb") do |csv|
 	# column headers
     csv << ["user_id", "previous rating", "rating", "rating delta", "prev rating time", "rating time", "time delta", "previous movie id", "movie id", "movie average"]
 	
