@@ -1,6 +1,10 @@
 require 'csv'
 
-class MultinomialClassifier
+# Class for using a multinomial to 
+# calculate the probability of pair sequences
+# of ratings based on a multinomial distribution
+#
+class MultinomialPairProbability
 	attr_accessor :distribution
 	
 	# Creates a distribution hash from a csv 
@@ -28,5 +32,18 @@ class MultinomialClassifier
 	# sequence as the product of their individual probabilities.
 	def probability_of_pair r1, r2
 		distribution[r1] * distribution[r2]
+	end
+
+	# Calculate the joint probability of each
+	# possible sequential pair of ratings.
+	def pair_probability_distribution
+		r = {}
+		(1..5).each do |i| 
+			(1..5).each do |j| 
+				r["#{i},#{j}"] = probability_of_pair(i,j)
+			end
+		end
+
+		return r
 	end
 end
