@@ -1,3 +1,6 @@
+# This script parses the MovieLens 100k data and builds a csv
+# that's organized around a series of sequential pairs of ratings
+# produced by each user.
 require 'csv'
 
 DATA_FOLDER = "../ml-100k"
