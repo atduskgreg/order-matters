@@ -6,6 +6,6 @@ The code assumes you have the [MovieLens 100k dataset](http://www.grouplens.org/
 
 ### TODO
 
-* Assuming the ratings are a normal distribution and the movies were presented in random order what is the probability of getting these rating deltas? If these are lower than expected by a statistically significant amount, that would be evidence of bias.
+* Compare 100k_pair_probabilities.csv to 100k_observed_pair_distribution.csv to look for a statistically significant difference (pairwise t-test?)
 
-* Does the rating of the previous movie significantly affect the rating of the next movie relative to the average rating for that movie?
+* Add some better explanation of how to reproduce the results. (Rake-based build script?)
