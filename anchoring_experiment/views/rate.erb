@@ -1,0 +1,62 @@
+<html>
+<head>
+	 <link rel="stylesheet" href="/style/blueprint/screen.css" type="text/css" media="screen, projection">
+    <link rel="stylesheet" href="/style/blueprint/print.css" type="text/css" media="print"><!--[if lt IE 8]><link rel="stylesheet" href="/style/blueprint/ie.css" type="text/css" media="screen, projection"><![endif]-->
+<style>
+#explain{
+	font-style: italic;
+}
+
+.container {
+	/*border: 1px solid #000;*/
+}
+
+#item{
+		/*border: 1px solid #000;*/
+		/*text-align: center;	*/
+
+}
+
+#item p {
+	margin: 0;
+}
+
+#item h3{
+	margin-top: 25px;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<div id="item" class="span-24">
+
+<div class="span-5 append-1">
+
+<img src="<%= @movie.img_url %>" />
+</div>
+<div class="span-8">
+	<h3><%= @movie.title %></h3>
+    <p id="explain">Select a rating for the movie. 1 being worst, 5 being best.</p>
+
+<form>
+	<p><input type="radio" name="rating" value="no"/> <label>Haven't seen it</label></p>
+	<p><input type="radio" name="rating" value="1"/> <label>1</label> </p>
+	<p><input type="radio" name="rating" value="2"/> <label>2</label></p>
+	<p><input type="radio" name="rating" value="3"/> <label>3</label></p>
+	<p><input type="radio" name="rating" value="4"/> <label>4</label></p>
+	<p><input type="radio" name="rating" value="5"/> <label>5</label></p>
+	<p><input type="submit" value="Rate" /></p>
+</form>
+</div>
+</div>
+
+</div>
+
+</body>
+
+</html>

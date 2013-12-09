@@ -1,0 +1,110 @@
+<html>
+<head>
+	 <link rel="stylesheet" href="/style/blueprint/screen.css" type="text/css" media="screen, projection">
+    <link rel="stylesheet" href="/style/blueprint/print.css" type="text/css" media="print"><!--[if lt IE 8]><link rel="stylesheet" href="/style/blueprint/ie.css" type="text/css" media="screen, projection"><![endif]-->
+<style>
+#explain{
+	font-style: italic;
+}
+
+.container {
+	/*border: 1px solid #000;*/
+}
+
+#item{
+		/*border: 1px solid #000;*/
+		/*text-align: center;	*/
+
+}
+
+#item p {
+	margin: 0;
+}
+
+#item h3{
+	margin-top: 25px;
+}
+
+.title {
+	/*display:block;*/
+	/*float:left;*/
+}
+
+.movie {
+	display: block;
+	/*padding-bottom: 10px;*/
+}
+
+.check {
+	/*float:left;*/
+	/*float: left;*/
+	/*margin-bottom: 5px;*/
+	/*width: 20px;*/
+	margin-bottom: 30px;
+	float:left;
+}
+
+.movie p {
+	margin: 0;
+}
+
+h2 {
+	margin: 0;
+}
+/*
+h4 {
+	border-bottom: 1px solid #000;
+}*/
+
+#submitList {
+	border-top: 1px solid #000;
+	/*background-color: #efe;*/
+	height: 50px;
+	padding: 25px;
+	text-align: center;
+}
+
+#submitList input{
+	background: #eee;
+	font-size: 24px;
+}
+
+h4 {
+	border-bottom: 1px solid #000;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+	<div class="span-24">
+		<h2>Check the box next to each movie that you've seen.</h2>
+		<form action="/sequence" method="post">
+		<h4>When you're done click "next" at the bottom of the page.</h4>
+
+			<input type="hidden" name="token" value="TOKEN HERE" />
+		<% @movies.each_slice(@movies.length / 4) do |movs| %>
+			<div class="span-5 movie">
+			<% movs.each do |m| %>
+				<input class='check' type="checkbox" name="seen[<%= m.id %>]" value="1" />
+				<p class="title"><%= m.title %></p>
+				<br style="clear:both" />
+
+			<% end %>
+			</div>
+		<% end %>
+		<div id="submitList" class="span-24">
+			<input  type="submit" value="NEXT" />
+		</div>
+		</form>
+
+	</div>
+</div>
+
+</body>
+
+</html>
