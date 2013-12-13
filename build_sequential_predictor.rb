@@ -39,12 +39,12 @@ CSV.foreach( path_to_data ) do |row|
 	previous_rating = row[3].to_i
 	time_delta = row[4].to_i
 
-	means[previous_rating] << (rating  + (previous_rating * (200-time_delta)/200.0))/2.0
+	means[previous_rating] << previous_rating - rating #(rating  + (previous_rating * (200-time_delta)/200.0))/2.0
 	all_ratings << rating
 end
 
 means.each do |k,v|
-	means[k] = (means[k].inject{|sum, i| sum+i} / means[k].length.to_f).round
+	means[k] = (means[k].inject{|sum, i| sum+i} / means[k].length.to_f)
 end
 
 puts means.inspect
