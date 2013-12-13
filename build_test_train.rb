@@ -23,7 +23,7 @@ File.open(path_to_train, "wb") do |train_file|
  	File.open(path_to_test, "wb") do |test_file|
  		CSV.open(path_to_train_csv, "wb") do |train_csv|
  			CSV.open(path_to_test_csv, "wb") do |test_csv|
- 				header = ["user id", "item id", "rating", "previous rating", "time delta"]
+ 				header = ["user id", "item id", "rating", "previous rating", "time delta", "rating delta"]
  				train_csv << header
  				test_csv << header
 
@@ -44,7 +44,7 @@ File.open(path_to_train, "wb") do |train_file|
 						if time_delta > 0 && time_delta < max_time_delta
 							# user id | item id | rating | timestamp
 							movielens_format = "#{user_id}\t#{item_id}\t#{rating}\t#{timestamp}\n"
-							csv_row = [user_id, item_id, rating, previous_rating, time_delta]
+							csv_row = [user_id, item_id, rating, previous_rating, time_delta, rating - previous_rating]
 							if rand < train_percentage
  								train_file << movielens_format
  								train_csv << csv_row
