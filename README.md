@@ -9,3 +9,5 @@ The code assumes you have the [MovieLens 100k dataset](http://www.grouplens.org/
 * Compare 100k_pair_probabilities.csv to 100k_observed_pair_distribution.csv to look for a statistically significant difference (pairwise t-test?)
 
 * Add some better explanation of how to reproduce the results. (Rake-based build script?)
+
+* Movie info about data file formats into a central place
