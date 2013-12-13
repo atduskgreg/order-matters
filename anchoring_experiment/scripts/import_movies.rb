@@ -45,7 +45,7 @@ end
 pre_count = Movie.count
 
 item_scores.each do |movie_id, rating|
-	if rating < 2 || rating > 4
+	if (rating > 2.75 && rating < 3.25)
 		puts "Creating movie with rating of #{rating}."
 		puts movies[movie_id].inspect
 

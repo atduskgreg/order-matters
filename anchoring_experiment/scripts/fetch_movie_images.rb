@@ -2,8 +2,16 @@ require 'open-uri'
 require './models'
 require 'nokogiri'
 
+PUBLIC_IMAGE_DIR = "#{File.expand_path(File.dirname(__FILE__))}/../public/images/movies"
+
 Movie.all.each_with_index do |movie, i|
 	puts "#{i+1}/#{Movie.count}"
+
+	if FileTest.exists? "#{PUBLIC_IMAGE_DIR}/#{URI::encode movie.title}.jpg"
+		puts "Already have image for: #{movie.title}. Skipping..."
+		next
+	end
+
 	begin
 		# compose imdb url
 		query_url = "http://www.imdb.com/xml/find?xml=1&nr=1&tt=on&q=#{URI::encode movie.title}"
@@ -22,7 +30,7 @@ Movie.all.each_with_index do |movie, i|
 	
 		puts "save img"
 		#save img
-		File.open("#{File.expand_path(File.dirname(__FILE__))}/../public/images/movies/#{URI::encode movie.title}.jpg", "wb"){|f| f << open(img_url).read}
+		File.open("#{PUBLIC_IMAGE_DIR}/#{URI::encode movie.title}.jpg", "wb"){|f| f << open(img_url).read}
 	rescue Exception => e
 		puts "ERROR: [Moive: #{movie.id} #{movie.title}] #{e}"
 	end
