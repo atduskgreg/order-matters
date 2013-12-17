@@ -50,9 +50,9 @@ end
 
 post "/sequence/:sequence_token" do
 	@sequence = Sequence.first :token => params[:sequence_token]
-	puts params.inspect
-	puts params["seen"].inspect
-	@sequence.load_movies params["seen"].keys
+	puts "PARAMS: #{params.keys.inspect} #{params.inspect}"
+	puts "SEEN: #{params[:seen].inspect}"
+	@sequence.load_movies params[:seen].keys
 	@sequence.save
 
 	redirect "/sequence/#{@sequence.token}/0"
