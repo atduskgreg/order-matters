@@ -28,7 +28,7 @@ end
 
 post "/sequence/:sequence_token/:position" do
 	@sequence = Sequence.first :token => params[:sequence_token]
-	@rating = @sequence.ratings.first :position => params[:position]
+	@rating = @sequence.ratings.first :position => params[:position].to_i
 	@rating.rating = params[:rating]
 	@rating.save
 
