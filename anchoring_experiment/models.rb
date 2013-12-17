@@ -1,7 +1,7 @@
 require 'dm-core'
 require 'dm-migrations'
 require 'open-uri'
-require 'SecureRandom'
+# require 'SecureRandom'
 
 DataMapper.setup(:default, ENV['DATABASE_URL'] || 'postgres://localhost:5432/anchoring_experiment')
 
