@@ -50,6 +50,8 @@ end
 
 post "/sequence/:sequence_token" do
 	@sequence = Sequence.first :token => params[:sequence_token]
+	puts params.inspect
+	puts params["seen"].inspect
 	@sequence.load_movies params["seen"].keys
 	@sequence.save
 
