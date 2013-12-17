@@ -41,6 +41,7 @@ class Sequence
 	property :token, String
 	property :completion_token, String
 	property :used, Boolean, :default => false
+	property :agreement, Boolean, :default => false
 
 	has n, :ratings
 

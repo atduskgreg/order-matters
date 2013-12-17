@@ -1,6 +1,19 @@
 require 'sinatra'
 require './models'
 
+get "/agreement" do
+	@sequence = Sequence.first :used => false
+	erb :agreement
+end
+
+post "/agreement/:sequence_token" do
+	@sequence = Sequence.first :token => params[:sequence_token]
+	@sequence.agreement = true
+	@sequence.save
+
+	redirect "/movies/#{ @sequence.token }"
+end
+
 get "/movies/:sequence_token" do
 	@movies = Movie.all :order => :title
 	@sequence = Sequence.first :token => params[:sequence_token]
@@ -21,6 +34,7 @@ post "/sequence/:sequence_token/:position" do
 	if @sequence.ratings.length == @rating.position + 1
 		erb :done
 	else 
+		next_position = @rating.position + 1
 		redirect "/sequence/#{@sequence.token}/#{next_position}"
 	end
 

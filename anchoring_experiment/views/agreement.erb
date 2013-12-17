@@ -1,0 +1,130 @@
+<html>
+<head>
+	 <link rel="stylesheet" href="/style/blueprint/screen.css" type="text/css" media="screen, projection">
+    <link rel="stylesheet" href="/style/blueprint/print.css" type="text/css" media="print"><!--[if lt IE 8]><link rel="stylesheet" href="/style/blueprint/ie.css" type="text/css" media="screen, projection"><![endif]-->
+<style>
+#explain{
+	font-style: italic;
+}
+
+.container {
+	/*border: 1px solid #000;*/
+}
+
+#item{
+		/*border: 1px solid #000;*/
+		/*text-align: center;	*/
+
+}
+
+#item p {
+	margin: 0;
+}
+
+#item h3{
+	margin-top: 25px;
+}
+
+.title {
+	/*display:block;*/
+	/*float:left;*/
+}
+
+.movie {
+	display: block;
+	/*padding-bottom: 10px;*/
+}
+
+.check {
+	/*float:left;*/
+	/*float: left;*/
+	/*margin-bottom: 5px;*/
+	/*width: 20px;*/
+	margin-bottom: 30px;
+	float:left;
+}
+
+.movie p {
+	margin: 0;
+}
+
+h2 {
+	margin: 0;
+}
+/*
+h4 {
+	border-bottom: 1px solid #000;
+}*/
+
+#submitList {
+	border-top: 1px solid #000;
+	/*background-color: #efe;*/
+	height: 50px;
+	padding: 25px;
+	text-align: center;
+}
+
+#submitList input{
+	background: #eee;
+	font-size: 24px;
+}
+
+h4 {
+	border-bottom: 1px solid #000;
+}
+
+li {
+	display: inline;
+	margin-left:10px;
+}
+
+
+.alpha {
+	/*color: #fff;*/
+	text-decoration: none;
+		color: #fff;
+		font-weight: bold;
+
+	background: #000;
+	padding: 2px;
+}
+
+.top-link {
+	background: #fff;
+	float: right;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+	<div class="span-24" >
+<div class="span-12 prepend-6">
+			<h2>Please read this information</h2>
+
+<p>You are invited to participate in a survey, entitled "User Judgments for Interactive Machine Learning" The study is being conducted by Gregory Borenstein, Dr. Bradley Knox, and Prof. Cynthia Brazeal at the Massachusetts Institute of Technology (M.I.T.).</p>
+
+<p>The purpose of this study is to evaluate a a number of user interface options in recommendation systems.</p>
+
+<p>In this experiment, you will be asked to provide a series of ratings of movies on a scale from 1 to 5 stars. After providing a series of ratings, you will be presented with pairs of movies and asked which one you prefer. After that you will be asked to answer some questions about your experience.</p>
+
+<p>There are no anticipated risks greater than those associated with interaction with a computer. There will be no costs for participating. You will be paid for each HIT you complete. Any information obtained in connection with this study and that can be identified with you will remain confidential and will be disclosed only with your permission or as required by law.</p>
+
+<p>Your participation in this survey is voluntary. You may decline to answer any question and you have the right to withdraw from participation at any time without penalty. </p>
+
+<p>If you have any questions or concerns about the research, please feel free to contact Brad Knox at bradknox@mit.edu, (512) 542-3333, or Cynthia Breazeal at cynthiab@media.mit.edu, (617) 452-5601.</p>
+
+<form action="/agreement/<%= @sequence.token %>" method="post">
+ <input type="submit" value="I understand and want to participate in this study." />
+		</form>
+		</div>
+		</div>
+</div>
+
+</body>
+
+</html>
