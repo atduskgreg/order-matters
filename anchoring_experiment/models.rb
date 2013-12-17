@@ -47,7 +47,7 @@ class Sequence
 
 	def load_movies keys
 		keys.shuffle.each_with_index do |key, position|
-			ratings.create :movie => Movie.get(key),
+			ratings.create :movie => Movie.get(key.to_i),
 						   :position => position
 		end
 	end
