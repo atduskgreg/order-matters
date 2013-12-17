@@ -7,7 +7,7 @@ PUBLIC_IMAGE_DIR = "#{File.expand_path(File.dirname(__FILE__))}/../public/images
 Movie.all.each_with_index do |movie, i|
 	puts "#{i+1}/#{Movie.count}"
 
-	if FileTest.exists? "#{PUBLIC_IMAGE_DIR}/#{URI::encode movie.title}.jpg"
+	if FileTest.exists? "#{PUBLIC_IMAGE_DIR}/#{movie.img_filename}"
 		puts "Already have image for: #{movie.title}. Skipping..."
 		next
 	end
@@ -30,8 +30,8 @@ Movie.all.each_with_index do |movie, i|
 	
 		puts "save img"
 		#save img
-		File.open("#{PUBLIC_IMAGE_DIR}/#{URI::encode movie.title}.jpg", "wb"){|f| f << open(img_url).read}
+		File.open("#{PUBLIC_IMAGE_DIR}/#{movie.img_filename}", "wb"){|f| f << open(img_url).read}
 	rescue Exception => e
-		puts "ERROR: [Moive: #{movie.id} #{movie.title}] #{e}"
+		puts "ERROR: [Moive: #{movie.id} #{movie.title} #{imdb_page_url}] #{e}"
 	end
 end

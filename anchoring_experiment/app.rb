@@ -1,21 +1,43 @@
 require 'sinatra'
 require './models'
 
-# configure do
-# 	# puts File.dirname(__FILE__) + '/public'
-# 	set :public, 'public'
-# end
-
-get "/movies" do
+get "/movies/:sequence_token" do
 	@movies = Movie.all :order => :title
-	erb :all
+	@sequence = Sequence.first :token => params[:sequence_token]
+	
+	if @sequence
+		erb :all
+	else
+		erb :no_token
+	end
 end
 
-get "/movie/:movie_id" do
-	@movie = Movie.get params[:movie_id]
+post "/sequence/:sequence_token/:position" do
+	@sequence = Sequence.first :token => params[:sequence_token]
+	@rating = @sequence.ratings.first :position => params[:position]
+	@rating.rating = params[:rating]
+	@rating.save
+
+	if @sequence.ratings.length == @rating.position + 1
+		erb :done
+	else 
+		redirect "/sequence/#{@sequence.token}/#{next_position}"
+	end
+
+end
+
+get "/sequence/:sequence_token/:position" do
+	@sequence = Sequence.first :token => params[:sequence_token]
+	@rating =  @sequence.ratings.first( :position => params[:position].to_i )
+
 	erb :rate
 end
 
-post "/sequence" do
-	raise "yo"
+post "/sequence/:sequence_token" do
+	@sequence = Sequence.first :token => params[:sequence_token]
+	@sequence.load_movies params["seen"].keys
+	@sequence.used = true
+	@sequence.save
+
+	redirect "/sequence/#{@sequence.token}/0"
 end
