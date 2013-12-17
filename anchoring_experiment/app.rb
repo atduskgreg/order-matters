@@ -1,6 +1,10 @@
 require 'sinatra'
 require './models'
 
+get "/" do
+	redirect "/agreement"
+end
+
 get "/agreement" do
 	@sequence = Sequence.first :used => false
 	erb :agreement
