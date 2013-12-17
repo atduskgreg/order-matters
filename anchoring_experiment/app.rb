@@ -9,6 +9,7 @@ end
 post "/agreement/:sequence_token" do
 	@sequence = Sequence.first :token => params[:sequence_token]
 	@sequence.agreement = true
+	@sequence.used = true
 	@sequence.save
 
 	redirect "/movies/#{ @sequence.token }"
@@ -50,7 +51,6 @@ end
 post "/sequence/:sequence_token" do
 	@sequence = Sequence.first :token => params[:sequence_token]
 	@sequence.load_movies params["seen"].keys
-	@sequence.used = true
 	@sequence.save
 
 	redirect "/sequence/#{@sequence.token}/0"
