@@ -3,7 +3,8 @@
 # produced by each user.
 require 'csv'
 
-DATA_FOLDER = "../ml-100k"
+path_to_data = ARGV[0] || "../ml-100k/u.data"
+path_to_output = ARGV[1] || "100k_user_sequences.csv"
 
 # find average score for each movie
 # look to see if users' scores are affected by their scoring of the previous movie
@@ -11,7 +12,7 @@ DATA_FOLDER = "../ml-100k"
 item_scores = {}
 user_scores = {}
 
-open(DATA_FOLDER + "/u.data").read.split(/\n/).each do |line|
+open(path_to_data).read.split(/\n/).each do |line|
 	# split and parse tab-delimited data format based on information in DATA_FOLDER/README
 	parts = line.split(/\t/)
 	user_id = parts[0]
@@ -47,7 +48,7 @@ end
 
 i = 1
 
-CSV.open("100k_user_sequences.csv", "wb") do |csv|
+CSV.open(path_to_output, "wb") do |csv|
 	# column headers
     csv << ["user_id", "previous rating", "rating", "rating delta", "prev rating time", "rating time", "time delta", "previous movie id", "movie id", "movie average"]
 	
